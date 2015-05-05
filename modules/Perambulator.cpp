@@ -91,7 +91,7 @@ void LapH::Perambulator::read_perambulators_from_file (const int config_i) {
             filename.c_str(), rnd_vec_i, 
             Lt / q.number_of_dilution_T, q.number_of_dilution_E,
             q.number_of_dilution_D,
-            Lt, 13824,
+            Lt, Vs,
             config_i);
 
         if((fp = fopen(infile, "rb")) == NULL){

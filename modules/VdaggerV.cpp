@@ -219,7 +219,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
             rvdaggervr[op.id][t][rnd_j][rnd_i]
                           .block(vec_j%dilE, dilE*block , 1, dilE) +=
                 M.block(vec_j, dilE*block, 1, dilE) * 
-                std::conj(rnd_vec[1][rnd_j][blk_j]);
+                std::conj(rnd_vec[0][rnd_j][blk_j]);
           }}// end of dilution
         }}// rnd_j loop ends here
       }// rnd_i loop ends here
