@@ -122,8 +122,8 @@ void LapH::Correlators::read_rnd_vectors_from_file (const int config_i) {
 //  				+ "/" + temp;
 
       // read random vector
-      sprintf(infile, "%srandomvector.rndvecnb%02d.u.nbev%04d.%04d", 
-          filename.c_str(), rnd_vec_i, number_of_eigen_vec, config_i);
+      sprintf(infile, "%srandomvector.rndvecnb%02d.%s.nbev%04d.%04d", 
+          filename.c_str(), rnd_vec_i, q.type.c_str(), number_of_eigen_vec, config_i);
 //        sprintf(infile, "%srandomvector.rndvecnb%02d.u.nbev0120.%04d", 
 //            filename.c_str(), rnd_vec_i, config_i);
 

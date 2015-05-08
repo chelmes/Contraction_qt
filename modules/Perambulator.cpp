@@ -86,9 +86,9 @@ void LapH::Perambulator::read_perambulators_from_file (const int config_i) {
 
         //TODO: sink dilution is  hard-coded at the moment
         sprintf(infile,
-            "%sperambulator.rndvecnb%02d.u.TsoB%04d.VsoI%04d.DsoF%1d.TsiF%04d."
+            "%sperambulator.rndvecnb%02d.%s.TsoB%04d.VsoI%04d.DsoF%1d.TsiF%04d."
             "SsiF%d.DsiF4.CsiF3.smeared1.%05d", 
-            filename.c_str(), rnd_vec_i, 
+            filename.c_str(), rnd_vec_i, q.type.c_str(), 
             Lt / q.number_of_dilution_T, q.number_of_dilution_E,
             q.number_of_dilution_D,
             Lt, Vs,
