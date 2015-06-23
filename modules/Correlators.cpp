@@ -113,7 +113,7 @@ void LapH::Correlators::read_rnd_vectors_from_file (const int config_i) {
 //        std::string filename = global_data->get_path_perambulators() + "/";
 
       // data path for qbig contractions
-      sprintf(temp, "cnfg%d/rnd_vec_%01d/", config_i, rnd_vec_i);
+      sprintf(temp, "cnfg%04d/rnd_vec_%01d/", config_i, rnd_vec_i);
       std::string filename = q.path + "/" + temp;
 
       // data path for juqueen contractions
