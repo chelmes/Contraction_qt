@@ -26,14 +26,16 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
     int t_sink_1 = (t_sink + 1) % Lt;
     for(int t_source = 0; t_source < Lt; ++t_source){
       const int t_source_1 = (t_source + 1) % Lt;
-
+      // As a Test construct X from scratch
       if(t_source != 0){
         if(t_source%2 == 0){
-          X.swap(1, 0);
+          //X.swap(1, 0);
+          X.construct(basic, vdaggerv, 0, t_source, t_sink, 1);
           X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 0);
         }
         else{
-          X.swap(0, 1);
+          //X.swap(0, 1);
+          X.construct(basic, vdaggerv, 0, t_source, t_sink, 0);
           X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 1);
         }
       }
@@ -133,3 +135,37 @@ void LapH::Correlators::write_C4_3(const size_t config_i){
 
 }
 
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+//TODO: is that still necessary?
+void LapH::Correlators::write_C4_4(const size_t config_i){
+
+  char outfile[400];
+  FILE *fp = NULL;
+  std::string outpath = global_data->get_output_path() + "/" + 
+      global_data->get_name_lattice();
+
+  const int Lt = global_data->get_Lt();
+
+  const indexlist_4 rnd_vec_index = global_data->get_rnd_vec_4pt();
+  const size_t norm1 = Lt*rnd_vec_index.size();
+
+  const vec_index_IO_1 op_C4_IO = global_data->get_lookup_4pt_4_IO();
+
+  if(op_C4_IO.size() == 0)
+    return;
+
+  // normalisation
+  for(auto i = C4_mes.data(); i < (C4_mes.data()+C4_mes.num_elements()); i++)
+    *i /= norm1;
+
+  // output to lime file
+  // outfile - filename
+  // C4_mes  - boost structure containing all correlators
+
+  sprintf(outfile, "%s/C4_4_conf%04d.dat", outpath.c_str(), (int)config_i);
+  export_corr_IO(outfile, op_C4_IO, "C4I2+_4", C4_mes);
+
+}

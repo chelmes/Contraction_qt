@@ -57,6 +57,7 @@ private:
   void build_Corr();
   void build_and_write_2pt(const size_t config_i);
   void write_C4_3(const size_t config_i);
+  void write_C4_4(const size_t config_i);
   void build_and_write_C4_1(const size_t config_i);
   void build_and_write_C4_2(const size_t config_i);
 
