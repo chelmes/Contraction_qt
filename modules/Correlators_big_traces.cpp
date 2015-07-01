@@ -73,16 +73,27 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
           #pragma omp task shared(op, i)
           {
           cmplx priv_C4(0.0,0.0);
+          //for(const auto& rnd_it : rnd_vec_index) {
+
+          //  if(t_source%2 == 0)
+
+          //    priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+          //                X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+          //  else
+          //    priv_C4 += std::conj(
+          //               (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+          //                X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+          //}
           for(const auto& rnd_it : rnd_vec_index) {
 
             if(t_source%2 == 0)
 
-              priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+              priv_C4 += (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
             else
               priv_C4 += std::conj(
-                         (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+                         (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
           }
           #pragma omp critical
           {
@@ -135,37 +146,3 @@ void LapH::Correlators::write_C4_3(const size_t config_i){
 
 }
 
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-//TODO: is that still necessary?
-void LapH::Correlators::write_C4_4(const size_t config_i){
-
-  char outfile[400];
-  FILE *fp = NULL;
-  std::string outpath = global_data->get_output_path() + "/" + 
-      global_data->get_name_lattice();
-
-  const int Lt = global_data->get_Lt();
-
-  const indexlist_4 rnd_vec_index = global_data->get_rnd_vec_4pt();
-  const size_t norm1 = Lt*rnd_vec_index.size();
-
-  const vec_index_IO_1 op_C4_IO = global_data->get_lookup_4pt_4_IO();
-
-  if(op_C4_IO.size() == 0)
-    return;
-
-  // normalisation
-  for(auto i = C4_mes.data(); i < (C4_mes.data()+C4_mes.num_elements()); i++)
-    *i /= norm1;
-
-  // output to lime file
-  // outfile - filename
-  // C4_mes  - boost structure containing all correlators
-
-  sprintf(outfile, "%s/C4_4_conf%04d.dat", outpath.c_str(), (int)config_i);
-  export_corr_IO(outfile, op_C4_IO, "C4I2+_4", C4_mes);
-
-}
