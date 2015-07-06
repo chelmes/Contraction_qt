@@ -65,6 +65,7 @@ void LapH::Correlators::compute_correlators(const size_t config_i){
 
   // memory for intermediate matrices when building C4_3 (save multiplications)
   LapH::CrossOperator X(2);
+  LapH::CrossOperator X2(2);
 
   basic.init_operator('b', vdaggerv, peram);
 
@@ -75,8 +76,13 @@ void LapH::Correlators::compute_correlators(const size_t config_i){
   // computing the meson 4pt big cross trace
   // TODO: if condition that at least four random vectos are needed
   compute_meson_4pt_cross_trace(X);
-//
   write_C4_3(config_i);
+  // setting the correlation functions to zero
+//  std::fill(Corr.data(), Corr.data()+Corr.num_elements(), cmplx(.0,.0));
+  std::fill(C4_mes.data(), C4_mes.data()+C4_mes.num_elements(), cmplx(.0,.0));
+  build_C4_4(X2);
+  // In principal a simple copy of write_C4_3, added for clarity
+  write_C4_4(config_i);
   build_and_write_2pt(config_i);
   build_and_write_C4_1(config_i);
   build_and_write_C4_2(config_i);
