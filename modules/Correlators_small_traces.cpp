@@ -38,6 +38,7 @@ void LapH::Correlators::build_Corr(){
       for(const auto& op : op_C2){
 
         size_t id_Q2 = op.index_Q2;
+        std::cout << "in 2pt function using quark line: " << id_Q2 << std::endl; 
         size_t id_Corr = op.index_Corr;
 
       #pragma omp task shared(op)

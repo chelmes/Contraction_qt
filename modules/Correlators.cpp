@@ -78,7 +78,6 @@ void LapH::Correlators::compute_correlators(const size_t config_i){
   compute_meson_4pt_cross_trace(X);
   write_C4_3(config_i);
   // setting the correlation functions to zero
-//  std::fill(Corr.data(), Corr.data()+Corr.num_elements(), cmplx(.0,.0));
   std::fill(C4_mes.data(), C4_mes.data()+C4_mes.num_elements(), cmplx(.0,.0));
   build_C4_4(X2);
   // In principal a simple copy of write_C4_3, added for clarity

@@ -26,23 +26,39 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
     for(int t_source = 0; t_source < Lt; ++t_source){
       const int t_source_1 = (t_source + 1) % Lt;
       // As a Test construct X from scratch
+      //if(t_source != 0){
+      //  if(t_source%2 == 0){
+      //    //X.swap(1, 0);
+      //    X.construct(basic, vdaggerv, 0, t_source, t_sink, 1);
+      //    X.construct(basic, vdaggerv, 1, t_source_1, t_sink_1, 0);
+      //  }
+      //  else{
+      //    //X.swap(0, 1);
+      //    X.construct(basic, vdaggerv, 0, t_source, t_sink_1, 0);
+      //    X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 1);
+      //  }
+      //}
+      //else{
+      //    X.construct(basic, vdaggerv, 0, t_source, t_sink, 1);
+      //    X.construct(basic, vdaggerv, 1, t_source_1, t_sink_1, 0);
+      //}
+
       if(t_source != 0){
         if(t_source%2 == 0){
           //X.swap(1, 0);
-          X.construct(basic, vdaggerv, 0, t_sink, t_source, 1);
-          X.construct(basic, vdaggerv, 1, t_sink, t_source_1, 0);
+          X.construct(basic, vdaggerv, 0, t_source_1, t_sink, 1);
+          X.construct(basic, vdaggerv, 1, t_source, t_sink, 0);
         }
         else{
           //X.swap(0, 1);
-          X.construct(basic, vdaggerv, 0, t_sink, t_source, 0);
-          X.construct(basic, vdaggerv, 1, t_sink, t_source_1, 1);
+          X.construct(basic, vdaggerv, 0, t_source_1, t_sink, 0);
+          X.construct(basic, vdaggerv, 1, t_source, t_sink, 1);
         }
       }
       else{
-          X.construct(basic, vdaggerv, 0, t_sink,   t_source, 1);
-          X.construct(basic, vdaggerv, 1, t_sink, t_source_1, 0);
+          X.construct(basic, vdaggerv, 0, t_source_1,   t_sink, 1);
+          X.construct(basic, vdaggerv, 1, t_source, t_sink, 0);
       }
-
       // Might be more efficient to start loop at t_sink+1 and completely skip
       // t_source == t_sink
       if(t_source == t_sink)
@@ -87,13 +103,13 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
 
             if(t_source%2 == 0)
 
-              priv_C4 += (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+              priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
               
             else
               priv_C4 += std::conj(
-                         (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+                         (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
           }
           #pragma omp critical
           {
@@ -199,13 +215,13 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
 
             if(t_source%2 == 0)
 
-              priv_C4 += (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+              priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
               
             else
               priv_C4 += std::conj(
-                         (X(1, i_0, i_0, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_0, i_0, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+                         (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
+                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
           }
           #pragma omp critical
           {
