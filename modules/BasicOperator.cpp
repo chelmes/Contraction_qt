@@ -333,7 +333,7 @@ void BasicOperator::init_operator(const char dilution,
           // getting the neighbour blocks
           const int tend = (Lt/dilT+t + ti - 1)%(Lt/dilT);  
           for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j) {
-            if(rnd_i != rnd_j){
+              //if(rnd_i != rnd_j){
 
               //dilution of d-quark from left
               for(size_t block_dil = 0; block_dil < 4; block_dil++){
@@ -352,7 +352,8 @@ void BasicOperator::init_operator(const char dilution,
 
               }}}//dilution ends here
 
-          }}}// loops over rnd_j and ti block end here 
+          //}
+          }}// loops over rnd_j and ti block end here 
         }// loop over t ends here
       }// loop over rnd_i ends here
     }//loop operators

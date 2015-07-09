@@ -473,7 +473,7 @@ void set_rnd_vec_1pt(std::vector<quark>& quarks, indexlist_1& rnd_vec_1pt) {
 // for two quarks
 void set_rnd_vec_2pt(std::vector<quark>& quarks, indexlist_2& rnd_vec_2pt) {
   // ATM hardcoded, check which quarks are being used
-  const int q1 = 0, q2 = 0;
+  const int q1 = 0, q2 = 1;
   const int rndq1 = quarks[q1].number_of_rnd_vec;
   const int rndq2 = quarks[q2].number_of_rnd_vec;
 
@@ -483,7 +483,7 @@ void set_rnd_vec_2pt(std::vector<quark>& quarks, indexlist_2& rnd_vec_2pt) {
     exit(-1);
   }
   for(size_t i = 0; i < rndq1; ++i) {
-    for(size_t j = 0; j < rndq1; ++j) {
+    for(size_t j = 0; j < rndq2; ++j) {
       // if the quarks are the same, skip the combinations
       // with i==j
       if( (q1 != q2) || (i != j) ) {
@@ -546,9 +546,9 @@ void set_rnd_vec_3pt(std::vector<quark>& quarks, indexlist_3& rnd_vec_3pt) {
 void set_rnd_vec_4pt(std::vector<quark>& quarks, indexlist_4& rnd_vec_4pt) {
   // ATM hardcoded, check which quarks are being used
   const int q1 = 0;
-  const int q2 = 0;
+  const int q2 = 1;
   const int q3 = 0;
-  const int q4 = 0;
+  const int q4 = 1;
   const int rndq1 = quarks[q1].number_of_rnd_vec;
   const int rndq2 = quarks[q2].number_of_rnd_vec;
   const int rndq3 = quarks[q3].number_of_rnd_vec;
