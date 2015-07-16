@@ -211,7 +211,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
                rnd_vec[1][rnd_i][blk_i];
         }}// end of dilution
         for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j){
-        if(rnd_i != rnd_j){
+        //quarks are different, same rnd vec indices allowed
+        //if(rnd_i != rnd_j){
           // dilution from right
           for(size_t block = 0; block < 4; block++){
           for(size_t vec_j = 0; vec_j < nb_ev; ++vec_j) {
@@ -221,7 +222,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
                 M.block(vec_j, dilE*block, 1, dilE) * 
                 std::conj(rnd_vec[0][rnd_j][blk_j]);
           }}// end of dilution
-        }}// rnd_j loop ends here
+        //}
+        }// rnd_j loop ends here
       }// rnd_i loop ends here
     }
   }
@@ -239,7 +241,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
 
       for(size_t rnd_i = 0; rnd_i < nb_rnd; ++rnd_i) {
       for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j){
-      if(rnd_i != rnd_j){
+      //quarks are different, same rnd vec indices allowed
+      //if(rnd_i != rnd_j){
 
         // rvdaggervr is a blockdiagonal 4*dilE x 4*dilE matrix. To save memory,
         // only the diagonal blocks are saved and it is written as a column 
@@ -252,7 +255,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
             (rvdaggervr[op.id_adjoint][t][rnd_i][rnd_j]
                               .block(0, block*dilE, dilE, dilE)).adjoint();
         }
-      }}}// loops over rnd vecs
+      //}
+      }}// loops over rnd vecs
 
     }
   }

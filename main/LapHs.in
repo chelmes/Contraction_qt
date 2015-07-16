@@ -7,13 +7,13 @@ Ly = 24
 Lz = 24 
 
 # configuration handling:
-start_config = 1002
-end_config   = 1002
+start_config = 0600
+end_config   = 0600
 delta_config = 8
 
 # eigenvector handling:
 number_of_eigen_vec = 120
-path_eigenvectors   = /hiskp2/eigensystems/A40.24_L24_T48_beta190_mul0040_musig150_mudel190_kappa1632700/hyp_062_058_3/nev_120
+path_eigenvectors   = /hiskp2/eigensystems/A60.24_L24_T48_beta190_mul0060_musig150_mudel190_kappa1632650/smearing_corr/hyp_062_058_3/nev_120 
 name_eigenvectors   = eigenvectors
 # perambulator handling
 path_perambulators  = ./
@@ -22,10 +22,10 @@ name_perambulators  = perambulator
 output_path = ./scratch
 lattice = ./
 
-# quarks to be used
+# quarks to be used/ Strange perams named wrong path is decisive
 [quarks]
-quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
-quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_2464
+quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A60/nev_120/up
+quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A60/nev_120/strange_2250
 
 # operators to be used
 [operator_lists]
@@ -34,6 +34,6 @@ operator_list = g3.d0.p0
 
 # all correlation functions which will be computed !!MUST BE AT END OF FILE!!
 [correlator_lists]
-correlator_list = C2+:Q0:Op0:Q0
-correlator_list = C4I2+:Q0:Op0:Q0:Op0:Q0:Op0:Q0:Op0
+correlator_list = C2+:Q0:Op0:Q1:Op0
+correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
 

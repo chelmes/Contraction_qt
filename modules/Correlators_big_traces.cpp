@@ -46,8 +46,8 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
       if(t_source != 0){
         if(t_source%2 == 0){
           //X.swap(1, 0);
-          X.construct(basic, vdaggerv, 0, t_source_1, t_sink, 1);
-          X.construct(basic, vdaggerv, 1, t_source, t_sink, 0);
+          X.construct(basic, vdaggerv, 0, t_source_1, t_sink, 0);
+          X.construct(basic, vdaggerv, 1, t_source, t_sink, 1);
         }
         else{
           //X.swap(0, 1);
@@ -56,8 +56,8 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
         }
       }
       else{
-          X.construct(basic, vdaggerv, 0, t_source_1,   t_sink, 1);
-          X.construct(basic, vdaggerv, 1, t_source, t_sink, 0);
+          X.construct(basic, vdaggerv, 0, t_source_1, t_sink, 0);
+          X.construct(basic, vdaggerv, 1, t_source, t_sink, 1);
       }
       // Might be more efficient to start loop at t_sink+1 and completely skip
       // t_source == t_sink
@@ -103,13 +103,13 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
 
             if(t_source%2 == 0)
 
-              priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+              priv_C4 += (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+                          X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace();
               
             else
               priv_C4 += std::conj(
-                         (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+                         (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+                          X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace());
           }
           #pragma omp critical
           {
@@ -121,7 +121,7 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
     }// loop t_source
   }// loop t_sink
 
-  std::cout << "\tcomputing the traces of 2 pi_+/-: " << "100.00%" << std::endl;
+  std::cout << "\tcomputing the traces of 2 k: " << "100.00%" << std::endl;
   time = clock() - time;
   std::cout << "\t\tSUCCESS - " << ((float) time)/CLOCKS_PER_SEC 
             << " seconds" << std::endl;
@@ -144,10 +144,10 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
   // TODO: must be changed in GlobalData {
   // TODO: }
 
-  std::cout << "\n\tcomputing the traces of 2 pi_+/-:\r";
+  std::cout << "\n\tcomputing the traces of 2 k:\r";
   clock_t time = clock();
   for(int t_sink = 0; t_sink < Lt; ++t_sink){
-    std::cout << "\tcomputing the traces of 2 pi_+/-: " 
+    std::cout << "\tcomputing the traces of 2 k: " 
         << std::setprecision(2) << (float) t_sink/Lt*100 << "%\r" 
         << std::flush;
     int t_sink_1 = (t_sink + 1) % Lt;
@@ -157,8 +157,8 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
       if(t_source != 0){
         if(t_source%2 == 0){
           //X.swap(1, 0);
-          X.construct(basic, vdaggerv, 0, t_source, t_sink, 1);
-          X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 0);
+          X.construct(basic, vdaggerv, 0, t_source, t_sink, 0);
+          X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 1);
         }
         else{
           //X.swap(0, 1);
@@ -167,8 +167,8 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
         }
       }
       else{
-          X.construct(basic, vdaggerv, 0, t_source,   t_sink, 1);
-          X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 0);
+          X.construct(basic, vdaggerv, 0, t_source,   t_sink, 0);
+          X.construct(basic, vdaggerv, 1, t_source_1, t_sink, 1);
       }
 
       // Might be more efficient to start loop at t_sink+1 and completely skip
@@ -215,13 +215,13 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
 
             if(t_source%2 == 0)
 
-              priv_C4 += (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace();
+              priv_C4 += (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+                          X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace();
               
             else
               priv_C4 += std::conj(
-                         (X(1, i_0, i_1, rnd_it[3], rnd_it[0], rnd_it[1]) *
-                          X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
+                         (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+                          X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace());
           }
           #pragma omp critical
           {

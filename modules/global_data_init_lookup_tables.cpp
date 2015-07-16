@@ -486,16 +486,17 @@ void set_rnd_vec_2pt(std::vector<quark>& quarks, indexlist_2& rnd_vec_2pt) {
     for(size_t j = 0; j < rndq2; ++j) {
       // if the quarks are the same, skip the combinations
       // with i==j
-      if( (q1 != q2) || (i != j) ) {
+      // if ( (q1 != q2) || i != j ){
+      if( (q1 != q2) ) {
         rnd_vec_2pt.emplace_back(i, j);
       }
     }
   }
 
-//  std::cout << "rnd_vec test: " << rnd_vec_C2.size() << std::endl;
-//  for(auto& r : rnd_vec_C2) {
-//    std::cout << r.first << " " << r.second << std::endl;
-//  }
+  std::cout << "rnd_vec test: " << rnd_vec_2pt.size() << std::endl;
+  for(auto& r : rnd_vec_2pt) {
+    std::cout << r.first << " " << r.second << std::endl;
+  }
 }
 
 // function to obtain index combinations of the random vectors 
@@ -503,7 +504,7 @@ void set_rnd_vec_2pt(std::vector<quark>& quarks, indexlist_2& rnd_vec_2pt) {
 void set_rnd_vec_3pt(std::vector<quark>& quarks, indexlist_3& rnd_vec_3pt) {
   // ATM hardcoded, check which quarks are being used
   const int q1 = 0;
-  const int q2 = 0;
+  const int q2 = 1;
   const int q3 = 0;
   const int rndq1 = quarks[q1].number_of_rnd_vec;
   const int rndq2 = quarks[q2].number_of_rnd_vec;
@@ -600,10 +601,10 @@ void set_rnd_vec_4pt(std::vector<quark>& quarks, indexlist_4& rnd_vec_4pt) {
     }
   }
 
-//  std::cout << "rnd_vec test: " << rnd_vec_C4.size() << std::endl;
-//  for(auto& r : rnd_vec_C4) {
-//    std::cout << r[0] << " " << r[1] << " " << r[2] << " " << r[3] << std::endl;
-//  }
+  std::cout << "rnd_vec test: " << rnd_vec_4pt.size() << std::endl;
+  for(auto& r : rnd_vec_4pt) {
+    std::cout << r[0] << " " << r[1] << " " << r[2] << " " << r[3] << std::endl;
+  }
 }
 
 } // end of unnamed namespace
