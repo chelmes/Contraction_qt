@@ -114,8 +114,10 @@ void LapH::VdaggerV::build_vdaggerv (const int config_i) {
   LapH::EigenVector V_t(1, dim_row, nb_ev);// each thread needs its own copy
   #pragma omp for schedule(dynamic)
   for(size_t t = 0; t < Lt; ++t){
-
-    read_eigenvectors_from_file(V_t, config_i, t);
+    // Dirty hack to not read in eigensystems, since they are not needed for
+    // zero momentum!
+    // TODO: Rewrite as if condition
+    // read_eigenvectors_from_file(V_t, config_i, t);
 
     // VdaggerV is independent of the gamma structure and momenta connected by
     // sign flip are related by adjoining VdaggerV. Thus the expensive 
