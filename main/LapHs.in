@@ -7,8 +7,8 @@ Ly = 24
 Lz = 24 
 
 # configuration handling:
-start_config = 0600
-end_config   = 0600
+start_config = 600
+end_config   = 600
 delta_config = 8
 
 # eigenvector handling:

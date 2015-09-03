@@ -21,7 +21,8 @@ LapH::Correlators::Correlators() : basic(), peram(), rnd_vec(), vdaggerv(),
   const size_t Lt = global_data->get_Lt();
   const size_t nb_ev = global_data->get_number_of_eigen_vec();
 
-  const size_t nb_rnd = quarks[0].number_of_rnd_vec +2;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec +2;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec +2;
 
   rnd_vec.resize(quarks.size());
   for(const auto& q: quarks){
@@ -40,10 +41,10 @@ LapH::Correlators::Correlators() : basic(), peram(), rnd_vec(), vdaggerv(),
   for(size_t op2 = 0; op2 < nb_op; op2++)
   for(size_t t1 = 0; t1 < Lt; t1++)
   for(size_t t2 = 0; t2 < Lt; t2++){
-    Corr[op1][op2][t1][t2].resize(nb_rnd);
-    for(size_t rnd1 = 0; rnd1 < nb_rnd; rnd1++){
-      Corr[op1][op2][t1][t2][rnd1].resize(nb_rnd);
-      for(size_t rnd2 = 0; rnd2 < nb_rnd; rnd2++)
+    Corr[op1][op2][t1][t2].resize(nb_rnd_0);
+    for(size_t rnd1 = 0; rnd1 < nb_rnd_0; rnd1++){
+      Corr[op1][op2][t1][t2][rnd1].resize(nb_rnd_1);
+      for(size_t rnd2 = 0; rnd2 < nb_rnd_1; rnd2++)
         Corr[op1][op2][t1][t2][rnd1][rnd2] = cmplx(0.0,0.0);
     }
   }
