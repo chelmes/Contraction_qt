@@ -56,6 +56,7 @@ void LapH::Perambulator::read_perambulators_from_file (const int config_i) {
     for(const auto& q: quarks){
 
       const int number_of_rnd_vec = q.number_of_rnd_vec;
+      std::cout << number_of_rnd_vec << std::endl;
       const int number_of_inversions = (Lt / q.number_of_dilution_T)
           * q.number_of_dilution_E * q.number_of_dilution_D;
       const int size_perambulator_entry = number_of_inversions * Lt * 4

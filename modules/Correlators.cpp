@@ -69,7 +69,7 @@ void LapH::Correlators::compute_correlators(const size_t config_i){
   LapH::CrossOperator X2(2);
 
   basic.init_operator('b', vdaggerv, peram);
-
+  std::cout << "initialized basic operator" << std::endl;
   // computing the meson correlator which can be used to compute all small
   // trace combinations for 2pt and 4pt functions
   build_Corr();

@@ -187,6 +187,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
   std::fill(rvdaggervr.data(), rvdaggervr.data() + rvdaggervr.num_elements(), 
             Eigen::MatrixXcd::Zero(dilE, 4*dilE));
 
+  std::cout << nb_rnd_0 << " " << nb_rnd_1 << std::endl; 
   // TODO: just a workaround
   // can be changed to op by running over p = op/nb_dg, but dis currently
   // not supported.
@@ -203,7 +204,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
 
       size_t id_VdaggerV = op_Corr[op.index].id_vdv;
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd_0; ++rnd_i) {
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_1; ++rnd_i) {
         Eigen::MatrixXcd M = Eigen::MatrixXcd::Zero(nb_ev, 4*dilE);
         // dilution from left
         for(size_t block= 0; block < 4; block++){
@@ -214,7 +215,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
                vdaggerv[id_VdaggerV][t].col(vec_i) * 
                rnd_vec[1][rnd_i][blk_i];
         }}// end of dilution
-        for(size_t rnd_j = 0; rnd_j < nb_rnd_1; ++rnd_j){
+        for(size_t rnd_j = 0; rnd_j < nb_rnd_0; ++rnd_j){
         //quarks are different, same rnd vec indices allowed
         //if(rnd_i != rnd_j){
           // dilution from right
