@@ -124,8 +124,7 @@ void LapH::Correlators::read_rnd_vectors_from_file (const int config_i) {
 
       // data path for juqueen contractions
 //        sprintf(temp, "cnfg%d/", config_i);
-//        std::string filename = global_data->get_path_perambulators()
-//  				+ "/" + temp;
+//        std::string filename = q.path + "/" + temp;
 
       // read random vector
       sprintf(infile, "%srandomvector.rndvecnb%02d.%s.nbev%04d.%04d", 

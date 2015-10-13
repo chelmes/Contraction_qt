@@ -215,10 +215,15 @@ void LapH::Correlators::compute_meson_4pt_cross_trace(LapH::CrossOperator& X) {
 
             if(t_source%2 == 0)
 
+              //priv_C4 += (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+              //            X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace();
               priv_C4 += (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
                           X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace();
               
             else
+              //priv_C4 += std::conj(
+              //           (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
+              //            X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace());
               priv_C4 += std::conj(
                          (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *
                           X(0, i_2, i_3, rnd_it[2], rnd_it[3], rnd_it[0])).trace());

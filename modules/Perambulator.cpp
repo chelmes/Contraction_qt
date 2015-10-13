@@ -1,5 +1,5 @@
-//everything to read and write from/to files
-
+////everything to read and write from/to files
+ //
 #include "Perambulator.h"
 
 // Definition of a pointer on global data
@@ -82,8 +82,7 @@ void LapH::Perambulator::read_perambulators_from_file (const int config_i) {
 
         // data path for juqueen contractions
 //        sprintf(temp, "cnfg%d/", config_i);
-//        std::string filename = global_data->get_path_perambulators() + "/"
-//            + temp;
+//        std::string filename = q.path + "/" + temp;
 
         //TODO: sink dilution is  hard-coded at the moment
         sprintf(infile,

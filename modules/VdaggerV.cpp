@@ -32,6 +32,9 @@ LapH::VdaggerV::VdaggerV() : vdaggerv(), rvdaggervr(), momentum(),
   const std::vector<quark> quarks = global_data->get_quarks();
   const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
   const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
+  
+  std::cout << quarks[0].type << "-quark initialized with " << nb_rnd_0 << " rnd_vecs" << std::endl; 
+  std::cout << quarks[1].type << "-quark initialized with " << nb_rnd_1 << " rnd_vecs" << std::endl; 
 
   const vec_pd_VdaggerV op_VdaggerV = global_data->get_lookup_VdaggerV();
   const vec_pd_rVdaggerVr op_rVdaggerVr = global_data->get_lookup_rVdaggerVr();
