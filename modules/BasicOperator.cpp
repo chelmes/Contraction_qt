@@ -229,7 +229,8 @@ BasicOperator::BasicOperator() : gamma(), Q2() {
 
   const size_t Lt = global_data->get_Lt();
   const std::vector<quark> quarks = global_data->get_quarks();
-  const size_t nb_rnd = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
   const size_t dilT = quarks[0].number_of_dilution_T;
   const size_t Q2_size = 4 * quarks[0].number_of_dilution_E;
   
@@ -250,10 +251,10 @@ BasicOperator::BasicOperator() : gamma(), Q2() {
   for(size_t t2 = 0; t2 < Lt/dilT; t2++)
   for(size_t t3 = 0; t3 < 3; t3++)
   for(size_t op = 0; op < nb_op; op++){
-    Q2[t1][t2][t3][op].resize(nb_rnd);
-    for(size_t rnd1 = 0; rnd1 < nb_rnd; rnd1++){
-      Q2[t1][t2][t3][op][rnd1].resize(nb_rnd);
-      for(size_t rnd2 = 0; rnd2 < nb_rnd; rnd2++)
+    Q2[t1][t2][t3][op].resize(nb_rnd_0);
+    for(size_t rnd1 = 0; rnd1 < nb_rnd_0; rnd1++){
+      Q2[t1][t2][t3][op][rnd1].resize(nb_rnd_1);
+      for(size_t rnd2 = 0; rnd2 < nb_rnd_1; rnd2++)
         Q2[t1][t2][t3][op][rnd1][rnd2] = 
                                       Eigen::MatrixXcd::Zero(Q2_size, Q2_size);
     }
@@ -271,7 +272,8 @@ void BasicOperator::init_operator(const char dilution,
   const int Lt = global_data->get_Lt();
   const size_t nb_ev = global_data->get_number_of_eigen_vec();
   const std::vector<quark> quarks = global_data->get_quarks();
-  const size_t nb_rnd = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
   const size_t dilE = quarks[0].number_of_dilution_E;
   const int dilT = quarks[0].number_of_dilution_T;
   const size_t Q2_size = 4 * dilE;
@@ -295,7 +297,7 @@ void BasicOperator::init_operator(const char dilution,
 
     for(const auto& op : op_Corr){
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd; ++rnd_i) {
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_1; ++rnd_i) {
         for(int t = 0; t < Lt/dilT; t++){
           // new momentum -> recalculate M[0]
           // M only depends on momentum and displacement. first_vdv 
@@ -332,7 +334,7 @@ void BasicOperator::init_operator(const char dilution,
           for(int ti = 0; ti < 3; ti++){
           // getting the neighbour blocks
           const int tend = (Lt/dilT+t + ti - 1)%(Lt/dilT);  
-          for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j) {
+          for(size_t rnd_j = 0; rnd_j < nb_rnd_0; ++rnd_j) {
               if(rnd_i != rnd_j){
 
               //dilution of d-quark from left
@@ -343,7 +345,7 @@ void BasicOperator::init_operator(const char dilution,
                   for(size_t col = 0; col < 4; col++){
                   for(size_t row = 0; row < 4; row++){
 
-                    Q2[t_0][t][ti][op.id][rnd_i][rnd_j]
+                    Q2[t_0][t][ti][op.id][rnd_j][rnd_i]
                         .block(row*dilE, col*dilE, dilE, dilE) += value * 
                       M.block(row*dilE, block_dil* nb_ev, dilE, nb_ev) * 
                       peram(0, rnd_j)

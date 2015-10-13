@@ -30,8 +30,8 @@ LapH::VdaggerV::VdaggerV() : vdaggerv(), rvdaggervr(), momentum(),
   const size_t Vs = global_data->get_Lx() * global_data->get_Ly() * 
                     global_data->get_Lz();         
   const std::vector<quark> quarks = global_data->get_quarks();
-  const size_t nb_rnd0 = quarks[0].number_of_rnd_vec;
-  const size_t nb_rnd1 = quarks[1].number_of_rnd_vec;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
 
   const vec_pd_VdaggerV op_VdaggerV = global_data->get_lookup_VdaggerV();
   const vec_pd_rVdaggerVr op_rVdaggerVr = global_data->get_lookup_rVdaggerVr();
@@ -43,7 +43,7 @@ LapH::VdaggerV::VdaggerV() : vdaggerv(), rvdaggervr(), momentum(),
   // must be mapped correctly from outside by addressing the momentum
   // correctly and daggering
   vdaggerv.resize(boost::extents[nb_VdaggerV][Lt]);
-  rvdaggervr.resize(boost::extents[nb_rVdaggerVr][Lt][nb_rnd][nb_rnd]);
+  rvdaggervr.resize(boost::extents[nb_rVdaggerVr][Lt][nb_rnd_0][nb_rnd_1]);
 
   // the momenta only need to be calculated for a subset of quantum numbers
   // (see VdaggerV::build_vdaggerv)
@@ -178,7 +178,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
   const size_t nb_ev = global_data->get_number_of_eigen_vec();
   const std::vector<quark> quarks = global_data->get_quarks();
   const size_t dilE = quarks[0].number_of_dilution_E;
-  const size_t nb_rnd = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
 
   const vec_pd_rVdaggerVr op_rVdaggerVr = global_data->get_lookup_rVdaggerVr();
   const vec_pdg_Corr op_Corr = global_data->get_lookup_corr();
@@ -202,7 +203,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
 
       size_t id_VdaggerV = op_Corr[op.index].id_vdv;
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd; ++rnd_i) {
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_1; ++rnd_i) {
         Eigen::MatrixXcd M = Eigen::MatrixXcd::Zero(nb_ev, 4*dilE);
         // dilution from left
         for(size_t block= 0; block < 4; block++){
@@ -213,7 +214,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
                vdaggerv[id_VdaggerV][t].col(vec_i) * 
                rnd_vec[1][rnd_i][blk_i];
         }}// end of dilution
-        for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j){
+        for(size_t rnd_j = 0; rnd_j < nb_rnd_0; ++rnd_j){
         //quarks are different, same rnd vec indices allowed
         if(rnd_i != rnd_j){
           // dilution from right
@@ -242,8 +243,8 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
   for(const auto& op : op_rVdaggerVr){
     if(op.adjoint == true){
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd; ++rnd_i) {
-      for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j){
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_0; ++rnd_i) {
+      for(size_t rnd_j = 0; rnd_j < nb_rnd_1; ++rnd_j){
       //quarks are different, same rnd vec indices allowed
       if(rnd_i != rnd_j){
 
