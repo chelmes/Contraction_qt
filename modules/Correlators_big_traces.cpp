@@ -100,7 +100,8 @@ void LapH::Correlators::build_C4_4(LapH::CrossOperator& X) {
           //                X(0, i_2, i_3, rnd_it[1], rnd_it[2], rnd_it[3])).trace());
           //}
           for(const auto& rnd_it : rnd_vec_index) {
-
+            // rnd_it[0], rnd_it[2] correspond to 1st quark
+            // rnd_it[1], rnd_it[3] correspond to 2nd quark 
             if(t_source%2 == 0)
 
               priv_C4 += (X(1, i_0, i_1, rnd_it[0], rnd_it[1], rnd_it[2]) *

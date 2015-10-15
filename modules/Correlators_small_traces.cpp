@@ -216,6 +216,8 @@ void LapH::Correlators::build_and_write_C4_1(const size_t config_i){
       size_t id_Corr_1 = op_C2[i.second].index_Corr;
 
       for(const auto& rnd : rnd_vec_index) {
+          //rnd[0],rnd[2]: 1st quark
+          //rnd[1],rnd[3]: 2nd quark
         C4_mes[op.id][abs((t_sink - t_source - Lt) % Lt)] +=
           //(Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink_1][rnd[0]][rnd[2]]) *
           //(Corr[id_Q2_1][id_Corr_1][t_source][t_sink][rnd[1]][rnd[3]]);

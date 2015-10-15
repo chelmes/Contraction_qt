@@ -8,11 +8,12 @@ LapH::CrossOperator::CrossOperator(const size_t number) : X(number) {
   const vec_index_4pt op_C4 = global_data->get_lookup_4pt_trace();
   const size_t nb_op = op_C4.size();
   const std::vector<quark> quarks = global_data->get_quarks();
-  const size_t nb_rnd = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_0 = quarks[0].number_of_rnd_vec;
+  const size_t nb_rnd_1 = quarks[1].number_of_rnd_vec;
   const size_t dilE = quarks[0].number_of_dilution_E;
 
   for(auto& xx : X){
-    xx.resize(boost::extents[nb_op][nb_op][nb_rnd][nb_rnd][nb_rnd]);
+    xx.resize(boost::extents[nb_op][nb_op][nb_rnd_0][nb_rnd_1][nb_rnd_0]);
 
     std::fill(xx.data(), xx.data() + xx.num_elements(), 
                 Eigen::MatrixXcd(4 * dilE, 4 * dilE));
@@ -73,6 +74,8 @@ void LapH::CrossOperator::construct(const BasicOperator& basic,
 
     #pragma omp task shared (op)
     for(auto& rnd_it : rnd_vec_index) {
+      // rnd_it[0] and rnd_it[2]: first quark
+      // rnd_it[1]: second quark
       compute_X(basic, id_Corr, 
                 basic.get_operator(t_source, tu, td, id_Q2, rnd_it[0], rnd_it[1]),
                 vdaggerv.return_rvdaggervr(op_Corr[id_Corr].id_rvdvr, t2,
