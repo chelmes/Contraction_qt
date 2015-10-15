@@ -7,8 +7,8 @@ Ly = 20
 Lz = 20 
 
 # configuration handling:
-start_config = 1300
-end_config   = 1300
+start_config = 1300 
+end_config   = 1300 
 delta_config = 8
 
 # eigenvector handling:
@@ -35,5 +35,5 @@ operator_list = g3.d0.p0
 # all correlation functions which will be computed !!MUST BE AT END OF FILE!!
 [correlator_lists]
 correlator_list = C2+:Q0:Op0:Q1:Op0
-correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
+#correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
 

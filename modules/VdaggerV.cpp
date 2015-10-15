@@ -213,6 +213,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
                rnd_vec[1][rnd_i][blk_i];
         }}// end of dilution
         for(size_t rnd_j = 0; rnd_j < nb_rnd; ++rnd_j){
+          std::cout << "rnd_vec indices used: i: " << rnd_i << " j: " << rnd_j << std::endl;
         //quarks are different, same rnd vec indices allowed
         //if(rnd_i != rnd_j){
           // dilution from right

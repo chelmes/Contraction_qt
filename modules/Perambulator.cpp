@@ -21,6 +21,8 @@ LapH::Perambulator::Perambulator () : perambulator() {
   perambulator.resize(boost::extents[quarks.size()][10]);
   for(const auto& q: quarks){
     const int number_of_rnd_vec = q.number_of_rnd_vec;
+    std::cout << "Construct perambulator "<< q.type << " with " <<
+                  number_of_rnd_vec << " Random Vectors" << std::endl;
     const int nb_i = (Lt / q.number_of_dilution_T) * q.number_of_dilution_E * 
                      q.number_of_dilution_D;
   
