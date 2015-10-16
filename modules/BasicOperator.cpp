@@ -296,7 +296,7 @@ void BasicOperator::init_operator(const char dilution,
 
     for(const auto& op : op_Corr){
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd_1; ++rnd_i) {
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_0; ++rnd_i) {
         for(int t = 0; t < Lt/dilT; t++){
           // new momentum -> recalculate M[0]
           // M only depends on momentum and displacement. first_vdv 
@@ -307,14 +307,14 @@ void BasicOperator::init_operator(const char dilution,
             for(size_t row = 0; row < 4; ++row) {
               if(op.negative_momentum == false){
                 M.block(dilE * col, nb_ev * row, dilE, nb_ev) = 
-                  (peram(1, rnd_i).block(nb_ev * (4 * t_0 + row), 
+                  (peram(0, rnd_i).block(nb_ev * (4 * t_0 + row), 
                                       dilE * (4 * t + col), 
                                       nb_ev, dilE)).adjoint() *
                   vdaggerv.return_vdaggerv(op.id_vdv, t_0);
               }
               else {
                 M.block(dilE * col, nb_ev * row, dilE, nb_ev) = 
-                  (peram(1, rnd_i).block(nb_ev * (4 * t_0 + row), 
+                  (peram(0, rnd_i).block(nb_ev * (4 * t_0 + row), 
                                       dilE * (4 * t + col), 
                                       nb_ev, dilE)).adjoint() *
                   // TODO: calculate V^daggerV Omega from op.negative_momentum 
@@ -333,7 +333,7 @@ void BasicOperator::init_operator(const char dilution,
           for(int ti = 0; ti < 3; ti++){
           // getting the neighbour blocks
           const int tend = (Lt/dilT+t + ti - 1)%(Lt/dilT);  
-          for(size_t rnd_j = 0; rnd_j < nb_rnd_0; ++rnd_j) {
+          for(size_t rnd_j = 0; rnd_j < nb_rnd_1; ++rnd_j) {
               //if(rnd_i != rnd_j){
         //std::cout << "rnd_i: " << rnd_i << "\t" << "rnd_j: " << rnd_j << std::endl;
               //dilution of d-quark from left
@@ -347,7 +347,7 @@ void BasicOperator::init_operator(const char dilution,
                     Q2[t_0][t][ti][op.id][rnd_i][rnd_j]
                         .block(row*dilE, col*dilE, dilE, dilE) += value * 
                       M.block(row*dilE, block_dil* nb_ev, dilE, nb_ev) * 
-                      peram(0, rnd_j)
+                      peram(1, rnd_j)
                         .block(4*nb_ev*t_0 + order_dirac(op.id, block_dil)*nb_ev, 
                           Q2_size*tend + col*dilE, nb_ev, dilE);
 

@@ -79,7 +79,7 @@ void LapH::CrossOperator::construct(const BasicOperator& basic,
       compute_X(basic, id_Corr, 
                 basic.get_operator(t_source, tu, td, id_Q2, rnd_it[0], rnd_it[1]),
                 vdaggerv.return_rvdaggervr(op_Corr[id_Corr].id_rvdvr, t2,
-                                           rnd_it[1], rnd_it[2]),
+                                           rnd_it[2], rnd_it[1]),
                 X[nb][id_Q2][id_Corr][rnd_it[0]][rnd_it[1]][rnd_it[2]]);
 
     } // loop over random vectors
