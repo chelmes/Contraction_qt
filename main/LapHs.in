@@ -19,13 +19,13 @@ name_eigenvectors   = eigenvectors
 path_perambulators  = ./
 name_perambulators  = perambulator
 # output path
-output_path = ./scratch_devel
+output_path = ./scratch_stable
 lattice = ./
 
 # quarks to be used/ Strange perams named wrong path is decisive
 [quarks]
-quark = s:3:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.20/nev_66/strange_225
 quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.20/nev_66/up
+quark = s:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.20/nev_66/strange_225
 
 # operators to be used
 [operator_lists]
@@ -35,5 +35,5 @@ operator_list = g3.d0.p0
 # all correlation functions which will be computed !!MUST BE AT END OF FILE!!
 [correlator_lists]
 correlator_list = C2+:Q0:Op0:Q1:Op0
-correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
+#correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
 

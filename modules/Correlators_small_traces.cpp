@@ -9,7 +9,7 @@ static GlobalData * const global_data = GlobalData::Instance();
 /******************************************************************************/
 /******************************************************************************/
 void LapH::Correlators::build_Corr(){
-
+  std::cout <<"reached building stage"<< std::endl;
   const size_t Lt = global_data->get_Lt();
   const std::vector<quark> quarks = global_data->get_quarks();
   const int dilT = quarks[0].number_of_dilution_T;
@@ -44,6 +44,7 @@ void LapH::Correlators::build_Corr(){
         // TODO: A collpase of both random vectors might be better but
         //       must be done by hand because rnd2 starts from rnd1+1
         for(const auto& rnd_it : rnd_vec_index) {
+          std::cout << rnd_it.first << " " << rnd_it.second << std::endl;
           // build all 2pt traces leading to C2_mes
           // Corr = tr(D_d^-1(t_sink) Gamma D_u^-1(t_source) Gamma)
           // TODO: Just a workaround
