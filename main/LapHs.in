@@ -2,30 +2,30 @@
 
 # lattice parameters:
 Lt = 48
-Lx = 20 
-Ly = 20 
-Lz = 20 
+Lx = 24 
+Ly = 24 
+Lz = 24 
 
 # configuration handling:
-start_config = 1300 
-end_config   = 1300 
+start_config = 714 
+end_config   = 714 
 delta_config = 8
 
 # eigenvector handling:
-number_of_eigen_vec = 66
-path_eigenvectors   = /hiskp2/eigensystems/A40.20_L20_T48_beta190_mul0040_musig150_mudel190_kappa1632700/hyp_062_062_3/nev_120 
+number_of_eigen_vec = 120
+path_eigenvectors   = /hiskp2/eigensystems/A40.24_L24_T48_beta190_mul0040_musig150_mudel190_kappa1632700/hyp_062_058_3/nev_120/ 
 name_eigenvectors   = eigenvectors
 # perambulator handling
 path_perambulators  = ./
 name_perambulators  = perambulator
 # output path
-output_path = ./scratch_stable
+output_path = ./scratch_devel
 lattice = ./
 
 # quarks to be used/ Strange perams named wrong path is decisive
 [quarks]
-quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.20/nev_66/up
-quark = s:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.20/nev_66/strange_225
+quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
+quark = s:3:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_225
 
 # operators to be used
 [operator_lists]
@@ -35,5 +35,5 @@ operator_list = g3.d0.p0
 # all correlation functions which will be computed !!MUST BE AT END OF FILE!!
 [correlator_lists]
 correlator_list = C2+:Q0:Op0:Q1:Op0
-#correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
+correlator_list = C4I2+:Q0:Op0:Q1:Op0:Q0:Op0:Q1:Op0
 
