@@ -52,7 +52,7 @@ void LapH::Correlators::build_Corr(){
           compute_meson_small_traces(id_Corr, basic.get_operator
             (t_source, t_sink/dilT, 1, id_Q2, rnd_it.first, rnd_it.second),
             vdaggerv.return_rvdaggervr(op_Corr[id_Corr].id_rvdvr, t_sink, 
-                rnd_it.first, rnd_it.second),
+                rnd_it.second, rnd_it.first),
             Corr[id_Q2][id_Corr][t_source][t_sink]
                 [rnd_it.first][rnd_it.second]);
 
