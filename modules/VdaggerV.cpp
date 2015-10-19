@@ -46,7 +46,7 @@ LapH::VdaggerV::VdaggerV() : vdaggerv(), rvdaggervr(), momentum(),
   // must be mapped correctly from outside by addressing the momentum
   // correctly and daggering
   vdaggerv.resize(boost::extents[nb_VdaggerV][Lt]);
-  rvdaggervr.resize(boost::extents[nb_rVdaggerVr][Lt][nb_rnd_0][nb_rnd_1]);
+  rvdaggervr.resize(boost::extents[nb_rVdaggerVr][Lt][nb_rnd_1][nb_rnd_0]);
 
   // the momenta only need to be calculated for a subset of quantum numbers
   // (see VdaggerV::build_vdaggerv)
@@ -206,7 +206,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
 
       size_t id_VdaggerV = op_Corr[op.index].id_vdv;
 
-      for(size_t rnd_i = 0; rnd_i < nb_rnd_1; ++rnd_i) {
+      for(size_t rnd_i = 0; rnd_i < nb_rnd_0; ++rnd_i) {
         Eigen::MatrixXcd M = Eigen::MatrixXcd::Zero(nb_ev, 4*dilE);
         // dilution from left
         for(size_t block= 0; block < 4; block++){
@@ -215,9 +215,9 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
           
           M.block(0, vec_i%dilE + dilE*block, nb_ev, 1) += 
                vdaggerv[id_VdaggerV][t].col(vec_i) * 
-               rnd_vec[1][rnd_i][blk_i];
+               rnd_vec[0][rnd_i][blk_i];
         }}// end of dilution
-        for(size_t rnd_j = 0; rnd_j < nb_rnd_0; ++rnd_j){
+        for(size_t rnd_j = 0; rnd_j < nb_rnd_1; ++rnd_j){
           std::cout << "rnd_vec indices used: i: " << rnd_i << " j: " << rnd_j << std::endl;
         //quarks are different, same rnd vec indices allowed
         //if(rnd_i != rnd_j){
@@ -228,7 +228,7 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
             rvdaggervr[op.id][t][rnd_j][rnd_i]
                           .block(vec_j%dilE, dilE*block , 1, dilE) +=
                 M.block(vec_j, dilE*block, 1, dilE) * 
-                std::conj(rnd_vec[0][rnd_j][blk_j]);
+                std::conj(rnd_vec[1][rnd_j][blk_j]);
           }}// end of dilution
         //}
         }// rnd_j loop ends here
@@ -258,9 +258,9 @@ void LapH::VdaggerV::build_rvdaggervr(const int config_i,
         // the blocks have to be adjoined seperately.
         // is .adjoint().transpose() faster?
         for(size_t block = 0; block < 4; block++){
-          rvdaggervr[op.id][t][rnd_j][rnd_i]
+          rvdaggervr[op.id][t][rnd_i][rnd_j]
                               .block(0, block*dilE, dilE, dilE) =
-            (rvdaggervr[op.id_adjoint][t][rnd_i][rnd_j]
+            (rvdaggervr[op.id_adjoint][t][rnd_j][rnd_i]
                               .block(0, block*dilE, dilE, dilE)).adjoint();
         }
       //}
