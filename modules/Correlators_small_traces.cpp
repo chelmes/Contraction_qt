@@ -222,8 +222,8 @@ void LapH::Correlators::build_and_write_C4_1(const size_t config_i){
         C4_mes[op.id][abs((t_sink - t_source - Lt) % Lt)] +=
           //(Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink_1][rnd[0]][rnd[2]]) *
           //(Corr[id_Q2_1][id_Corr_1][t_source][t_sink][rnd[1]][rnd[3]]);
-          (Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink_1][rnd[0]][rnd[1]]) *
-          (Corr[id_Q2_1][id_Corr_1][t_source][t_sink][rnd[2]][rnd[3]]);
+          (Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink_1][rnd[2]][rnd[3]]) *
+          (Corr[id_Q2_1][id_Corr_1][t_source][t_sink][rnd[0]][rnd[1]]);
       } // loop over random vectors
     }}//loops operators
   }}// loops t_sink and t_source
@@ -290,8 +290,10 @@ void LapH::Correlators::build_and_write_C4_2(const size_t config_i){
 
       for(const auto& rnd : rnd_vec_index) {
         C4_mes[op.id][abs((t_sink - t_source - Lt) % Lt)] +=
-          (Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink][rnd[0]][rnd[1]]) *
-          (Corr[id_Q2_1][id_Corr_1][t_source][t_sink_1][rnd[2]][rnd[3]]);
+          //(Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink][rnd[0]][rnd[1]]) *
+          //(Corr[id_Q2_1][id_Corr_1][t_source][t_sink_1][rnd[2]][rnd[3]]);
+          (Corr[id_Q2_0][id_Corr_0][t_source_1][t_sink][rnd[2]][rnd[3]]) *
+          (Corr[id_Q2_1][id_Corr_1][t_source][t_sink_1][rnd[0]][rnd[1]]);
       } // loop over random vectors
     }}//loops operators
   }}// loops t_source and t_sink
