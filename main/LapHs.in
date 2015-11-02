@@ -24,14 +24,15 @@ lattice = ./
 
 # quarks to be used/ Strange perams named wrong path is decisive
 [quarks]
+#quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
 quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
-quark = s:3:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_225
+quark = s:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_225
 
 
 # operators to be used
 [operator_lists]
 operator_list = g5.d0.p0
-operator_list = g3.d0.p0
+#operator_list = g3.d0.p0
 
 # all correlation functions which will be computed !!MUST BE AT END OF FILE!!
 [correlator_lists]
