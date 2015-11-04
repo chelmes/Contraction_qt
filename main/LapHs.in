@@ -26,7 +26,7 @@ lattice = ./
 [quarks]
 #quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
 quark = u:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/u_quark
-quark = s:5:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_225
+quark = s:3:TI:2:EI:6:DI:4:/hiskp2/perambulators/A40.24/strange_225
 
 
 # operators to be used
